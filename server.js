@@ -16,8 +16,8 @@ const root = {
 }
 
 const app = express();
-// This function takes in arguments which determine how graphql will respond
-app.use(graphqlHTTP({
+// This function takes in arguments which determine how graphql will respond, and specifying the endpoint
+app.use('/graphql', graphqlHTTP({
     // What data types we support
     schema: schema,
     // Values used in the response to the query
@@ -27,3 +27,14 @@ app.use(graphqlHTTP({
 app.listen(3000, () => {
     console.log('Running GraphQL server on port 3000...');
 })
+
+// Try sending in, as a raw json post request, the following to our endpoint through postman
+/* 
+{
+    "query": "{ description }"
+} 
+OR 
+{
+    "query": "{ description, price }"
+} 
+*/
