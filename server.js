@@ -12,7 +12,7 @@ const typesArray = loadFilesSync(path.join(__dirname, '**/*.graphql'));
 // typeDefs is just what graphql calls schemas, and it contains an array of our schema strings
 const schema = makeExecutableSchema({
     typeDefs: typesArray
-})
+});
 // Using the graphql function to build a schema for an ecommerce app. We define all the types of data we will have, and we always start with the query type, which every graphql service has. It defines the entry point of every query: it is the shape of the data that will be returned from our queries.
 // We can make types, which remind me of Classes, by doing what we did with Product and Review here. Adding ! after the type makes it a required field.
 // ID is a built in graphql type
@@ -20,42 +20,8 @@ const schema = makeExecutableSchema({
 
 // Static description and price values to use for now
 const root = {
-    products: [
-        {
-            id: 'witchhat',
-            description: 'Witch Hat',
-            price: 13.37
-        },
-        {
-            id: 'twosidedukulele',
-            description: 'Two-sided Ukulele',
-            price: 52.44
-        }
-    ],
-    orders: [
-        {
-            date: '2021-11-27',
-            subtotal: 72.91,
-            items: [
-                {
-                    product: {
-                        id: 'twosidedukulele',
-                        description: 'Two-sided Ukulele',
-                        price: 59.59
-                    },
-                    quantity: 1
-                },
-                {
-                    product: {
-                        id: 'witchhat',
-                        description: 'Old Witch Hat',
-                        price: 6.66
-                    },
-                    quantity: 2
-                }
-            ]
-        }
-    ]
+    products: require(path.join(__dirname, 'products/products.model.js')),
+    orders: require(path.join(__dirname, 'orders/orders.model.js'))
 }
 
 const app = express();
