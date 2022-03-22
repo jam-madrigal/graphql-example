@@ -21,7 +21,9 @@ app.use('/graphql', graphqlHTTP({
     // What data types we support
     schema: schema,
     // Values used in the response to the query
-    rootValue: root
+    rootValue: root,
+    // Enabling the graphiql front end interface built into graphql, under our /graphql endpoint. It allows us to query using the schema we created and even provides documentation automatically.
+    graphiql: true
 }));
 
 app.listen(3000, () => {
