@@ -7,7 +7,8 @@ const { graphqlHTTP } = require('express-graphql');
 // ID is a built in graphql type
 const schema = buildSchema(`
     type Query {
-        products: [Product]
+        products: [Product],
+        orders: [Order]
     }
 
     type Product {
@@ -50,13 +51,21 @@ const root = {
     orders: [
         {
             date: '2021-11-27',
-            subtotal: 119.18,
+            subtotal: 72.91,
             items: [
                 {
                     product: {
                         id: 'twosidedukulele',
-                        description: 'Birthday Ukulele',
+                        description: 'Two-sided Ukulele',
                         price: 59.59
+                    },
+                    quantity: 1
+                },
+                {
+                    product: {
+                        id: 'witchhat',
+                        description: 'Old Witch Hat',
+                        price: 6.66
                     },
                     quantity: 2
                 }
