@@ -1,9 +1,13 @@
+const path = require('path');
 const express = require('express');
 // An express middleware function that responds to graphql queries
 const { graphqlHTTP } = require('express-graphql');
+// Function imported from graphql-tools/load-files to use our .graphql files in our typeDefs array
+const { loadFilesSync } = require('@graphql-tools/load-files');
 // Function from graphql tools schema package which replaces buildSchema
 const { makeExecutableSchema } = require('@graphql-tools/schema');
-
+// Array to hold our schemas/types from our .graphql files. It takeas in a string with our file path. The ** (wildcard) means it looks in all directories in our project, and they can have any filename (another * wildcard) and it will find all the files with the .graphql extension
+const typesArray = loadFilesSync(path.join(__dirname, '**/*.graphql'));
 // Replacing our old schema with the graphql-tools schema function, which takes in an object
 // typeDefs is just what graphql calls schemas, and it contains an array of our schema strings
 const schema = makeExecutableSchema({
