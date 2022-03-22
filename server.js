@@ -11,7 +11,7 @@ const typesArray = loadFilesSync(path.join(__dirname, '**/*.graphql'));
 // Replacing our old schema with the graphql-tools schema function, which takes in an object
 // typeDefs is just what graphql calls schemas, and it contains an array of our schema strings
 const schema = makeExecutableSchema({
-    typeDefs: [schemaText]
+    typeDefs: typesArray
 })
 // Using the graphql function to build a schema for an ecommerce app. We define all the types of data we will have, and we always start with the query type, which every graphql service has. It defines the entry point of every query: it is the shape of the data that will be returned from our queries.
 // We can make types, which remind me of Classes, by doing what we did with Product and Review here. Adding ! after the type makes it a required field.
