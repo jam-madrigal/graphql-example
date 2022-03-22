@@ -1,39 +1,48 @@
 const express = require('express');
-const { buildSchema } = require('graphql');
 // An express middleware function that responds to graphql queries
 const { graphqlHTTP } = require('express-graphql');
+// Function from graphql tools schema package which replaces buildSchema
+const { makeExecutableSchema } = require('@graphql-tools/schema');
+
+const schemaText = `
+type Query {
+    products: [Product],
+    orders: [Order]
+}
+
+type Product {
+    id: ID!
+    description: String!,
+    price: Float!,
+    reviews: [Review]
+}
+
+type Review {
+    rating: Int!,
+    comment: String
+}
+
+type Order {
+    date: String!,
+    subtotal: Float!,
+    items: [OrderItem]
+}
+
+type OrderItem {
+    product: Product!,
+    quantity: Int!
+}
+`
+// Replacing our old schema with the graphql-tools schema function, which takes in an object
+// typeDefs is just what graphql calls schemas, and it contains an array of our schema strings
+const schema = makeExecutableSchema({
+    typeDefs: [schematext]
+})
 // Using the graphql function to build a schema for an ecommerce app. We define all the types of data we will have, and we always start with the query type, which every graphql service has. It defines the entry point of every query: it is the shape of the data that will be returned from our queries.
 // We can make types, which remind me of Classes, by doing what we did with Product and Review here. Adding ! after the type makes it a required field.
 // ID is a built in graphql type
-const schema = buildSchema(`
-    type Query {
-        products: [Product],
-        orders: [Order]
-    }
+// ***See old commits for original schema using the graphql buildSchema funtion
 
-    type Product {
-        id: ID!
-        description: String!,
-        price: Float!,
-        reviews: [Review]
-    }
-
-    type Review {
-        rating: Int!,
-        comment: String
-    }
-
-    type Order {
-        date: String!,
-        subtotal: Float!,
-        items: [OrderItem]
-    }
-
-    type OrderItem {
-        product: Product!,
-        quantity: Int!
-    }
-`);
 // Static description and price values to use for now
 const root = {
     products: [
