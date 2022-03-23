@@ -20,14 +20,16 @@ const schema = makeExecutableSchema({
         // The context argument is useful for data shared across all the different resolvers, such as authentication data
         // The info argument contains information about the current state of the operation  
         // After adding this, when we query, we can console.log and see these functions are now fetching our response
+        // We can even make these problems async in one of two ways, illustrated below
         Query: {
             products: (parent, args, context, info) => {
                 console.log('Getting products...');
-                return parent.products;
+                return Promise.resolve(parent.products);
             },
-            orders: (parent) => {
+            orders: async (parent) => {
                 console.log('Getting orders...');
-                return parent.orders;
+                const orders = await parent.orders;
+                return orders;
             },
         }
     }
