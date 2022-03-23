@@ -11,7 +11,26 @@ const typesArray = loadFilesSync(path.join(__dirname, '**/*.graphql'));
 // Replacing our old schema with the graphql-tools schema function, which takes in an object
 // typeDefs is just what graphql calls schemas, and it contains an array of our schema strings
 const schema = makeExecutableSchema({
-    typeDefs: typesArray
+    typeDefs: typesArray,
+    // Resolvers property which has our resolver functions: queries to fetch data from servers
+    resolvers: {
+        // Place functions here that match the root values of our schema. Graphql provides the parameters if we need them, as follows. Often times many of them are excluded, as they only come into play in some advanced contexts.
+        // The parent argument is by default set to the rootValue in our schema
+        // The args argument is for parameterized queries
+        // The context argument is useful for data shared across all the different resolvers, such as authentication data
+        // The info argument contains information about the current state of the operation  
+        // After adding this, when we query, we can console.log and see these functions are now fetching our response
+        Query: {
+            products: (parent, args, context, info) => {
+                console.log('Getting products...');
+                return parent.products;
+            },
+            orders: (parent) => {
+                console.log('Getting orders...');
+                return parent.orders;
+            },
+        }
+    }
 });
 // Using the graphql function to build a schema for an ecommerce app. We define all the types of data we will have, and we always start with the query type, which every graphql service has. It defines the entry point of every query: it is the shape of the data that will be returned from our queries.
 // We can make types, which remind me of Classes, by doing what we did with Product and Review here. Adding ! after the type makes it a required field.
