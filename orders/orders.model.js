@@ -23,6 +23,7 @@ const orders = [
     }
 ];
 
+// Get all orders
 function getAllOrders() {
     return orders;
 }

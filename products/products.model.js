@@ -11,10 +11,19 @@ const products = [
     }
 ];
 
+// Get all products
 function getAllProducts() {
     return products;
 }
 
+// Get products within a price range
+function getProductsByPrice(min, max) {
+    return products.filter((product) => {
+        return product.price >= min && product.price <= max;
+    });
+}
+
 module.exports = {
     getAllProducts,
+    getProductsByPrice
 }
