@@ -18,7 +18,7 @@ function getAllProducts() {
 
 // Get product by ID
 function getProductById(id) {
-    return products.filter((product) => {
+    return products.find((product) => {
         return product.id === id;
     });
 }
