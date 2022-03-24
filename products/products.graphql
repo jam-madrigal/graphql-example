@@ -1,6 +1,6 @@
 type Query {
     products: [Product],
-    product(id: String!): [Product]
+    product(id: String!): Product # This one is not in brackets, as it only returns the first product which matches our parameter: only one result. If we left it in brackets, it would expect an iterable, and we would be using filter() instead of find() in our function in our model.
     productsByPrice(min: Float!, max: Float!): [Product]
 }
 
