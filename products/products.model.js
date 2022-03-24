@@ -16,6 +16,13 @@ function getAllProducts() {
     return products;
 }
 
+// Get product by ID
+function getProductById(id) {
+    return products.filter((product) => {
+        return product.id === id;
+    });
+}
+
 // Get products within a price range
 function getProductsByPrice(min, max) {
     return products.filter((product) => {
@@ -25,5 +32,6 @@ function getProductsByPrice(min, max) {
 
 module.exports = {
     getAllProducts,
-    getProductsByPrice
+    getProductsByPrice,
+    getProductById
 }
