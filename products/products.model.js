@@ -47,5 +47,6 @@ function addNewProduct(id, description, price) {
 module.exports = {
     getAllProducts,
     getProductsByPrice,
-    getProductById
+    getProductById,
+    addNewProduct
 }
