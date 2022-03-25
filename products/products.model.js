@@ -2,12 +2,14 @@ const products = [
     {
         id: 'witchhat',
         description: 'Witch Hat',
-        price: 13.37
+        price: 13.37,
+        reviews: []
     },
     {
         id: 'twosidedukulele',
         description: 'Two-sided Ukulele',
-        price: 52.44
+        price: 52.44,
+        reviews: []
     }
 ];
 
@@ -28,6 +30,18 @@ function getProductsByPrice(min, max) {
     return products.filter((product) => {
         return product.price >= min && product.price <= max;
     });
+}
+
+// Add a new product and push it to our in-memory database
+function addNewProduct(id, description, price) {
+    const newProduct = {
+        id,
+        price,
+        description,
+        reviews: []
+    };
+    products.push(newProduct);
+    return newProduct;
 }
 
 module.exports = {

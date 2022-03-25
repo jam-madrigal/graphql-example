@@ -14,5 +14,11 @@ module.exports = {
             // These argument values come from the query
             return productsModel.getProductsByPrice(args.min, args.max)
         }
+    },
+
+    Mutation: {
+        addNewProduct: (_, args) => {
+            return productsModel.addNewProduct(args.id, args.description, args.price);
+        }
     }
 };
