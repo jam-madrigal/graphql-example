@@ -44,9 +44,23 @@ function addNewProduct(id, description, price) {
     return newProduct;
 }
 
+// Add a new product review, if a matching product is found
+function addNewProductReview(id, rating, comment) {
+    const matchedProduct = getProductById(id);
+    if (matchedProduct) {
+        const newProductReview = {
+            rating,
+            comment
+        }
+        matchedProduct.reviews.push(newProductReview);
+        return newProductReview;
+    }
+}
+
 module.exports = {
     getAllProducts,
     getProductsByPrice,
     getProductById,
-    addNewProduct
+    addNewProduct,
+    addNewProductReview
 }
