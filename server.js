@@ -27,7 +27,7 @@ async function startApolloServer() {
     });
     // Telling Apollo to prepare to handle incoming graphql operations, then connecting Apollo's graphql middleware with our express server. applyMiddleware is like using app.use on the middleware in ApolloServer, mounting it on app, and the path is the endpoint.
     await server.start();
-    server.applyMiddleware({ app, path: '/graphl' });
+    server.applyMiddleware({ app, path: '/graphql' });
 
     app.listen(3000, () => {
         console.log('Running GraphQL server on port 3000...');
